@@ -1,6 +1,6 @@
 var request = require('request');
 var cheerio = require('cheerio');
-
+var { WebClient } = require('@slack/web-api');
 
 function checkAvailability(url) {
     //Paste the cookie of your browser when you manually check website with a browser
@@ -26,7 +26,6 @@ function checkAvailability(url) {
         console.log("Button is disabled: " + disabled);
         console.log("time: " + (new Date).toUTCString() + "\n");
         if (status !== "Sold Out" && !disabled) {
-            const { WebClient } = require('@slack/web-api');
             // An access token (from your Slack app or custom integration - xoxp, xoxb)
             // Choose one of following and paste your token value:
             // 1) create access tokens:
