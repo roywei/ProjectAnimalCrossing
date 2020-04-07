@@ -19,13 +19,18 @@ function checkAvailability(url) {
         }
         console.log("Status code: " + response.statusCode);
         const $ = cheerio.load(body);
-        const status = $(".fulfillment-add-to-cart-button div button").text().trim();
-        const disabled = $(".fulfillment-add-to-cart-button div button").prop("disabled");
+
+        const onlineStatus = $(".addToCartLabel_1eyxz").text().trim();
+        const onlineDisabled = $(".button_1XJDJ.primary_1csTK.addToCartButton_1DQ8z.addToCartButton.regular_1e4gO.disabled_1VcOk").prop("disabled");
+        const storeStatus = $(".content_3dXxd").text().trim();
+        const storeDisabled = $(".button_2Xgu4.secondary_3qojI.x-reserveInStoreButton.button_3DPJc.reserveInStoreButton_1lmvr.undefined.regular_cDhX6.disabled_XY3i_").prop("disabled");
         console.log("Checking availablity for : " + url);
-        console.log("Inventory status: " + status);
-        console.log("Button is disabled: " + disabled);
+        console.log("Online status: " + onlineStatus);
+        console.log("Add to Cart is disabled: " + onlineDisabled);
+        console.log("Store status: " + storeStatus);
+        console.log("Reserve In Store is disabled: " + storeDisabled);
         console.log("time: " + (new Date).toUTCString() + "\n");
-        if (status !== "Sold Out" && !disabled) {
+        if (!onlineDisabled || !storeDisabled) {
             // An access token (from your Slack app or custom integration - xoxp, xoxb)
             // Choose one of following and paste your token value:
             // 1) create access tokens:
@@ -54,12 +59,10 @@ function checkAvailability(url) {
 
 const checkInventory = () => {
     //Paste the url for the product you want
-    const color = "https://www.bestbuy.com/site/nintendo-switch-32gb-console-neon-red-neon-blue-joy-con/6364255.p?skuId=6364255"
-    const ac = "https://www.bestbuy.com/site/nintendo-switch-animal-crossing-new-horizons-edition-32gb-console-multi/6401728.p?skuId=6401728"
-    const grey = "https://www.bestbuy.com/site/nintendo-switch-32gb-console-gray-joy-con/6364253.p?skuId=6364253"
-    const pink = "https://www.bestbuy.com/site/nintendo-switch-32gb-lite-coral/6257148.p?skuId=6257148"
+    const color = "https://www.bestbuy.ca/en-ca/product/nintendo-switch-console-with-neon-red-blue-joy-con/13817625"
+    const grey = "https://www.bestbuy.ca/en-ca/product/nintendo-switch-console-with-grey-joy-con/13817626"
+    const urls = [color, grey]
 
-    const urls = [color, ac, grey, pink]
     urls.forEach(checkAvailability)
 }
 console.log("Script starting...")
