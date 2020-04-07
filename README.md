@@ -2,13 +2,11 @@
 
 ## Dependency
 - Node 
-- AWS Simple Email Service(SES) for email notification
-- AWS-SDK (node version)
+- Slack Access Token
 
 ## Instruction
-0. clone this repo, run "npm install" to install dependencies
-1. Change url, cookie, sourceEmailAddr, destinationEmailAddrs
-2. You need an AWS account and follow AWS SES tutorial to setup your email for sending and receving notifications
+1. clone this repo, run "npm install" to install dependencies
+2. You need an Slack access token to send messages, you can create a [legacy token](https://api.slack.com/legacy/custom-integrations/legacy-tokens) or [slack app](https://api.slack.com/start)
 3. Run "node index.js" in the home directory in your local environment. Keep your machine and internet connection on.
 
 ## Notes
